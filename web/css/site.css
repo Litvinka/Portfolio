@@ -1,0 +1,216 @@
+html,
+body {
+    height: 100%;
+}
+
+h2{
+    font-size: 30px;
+    color: white;
+    margin-top: 0px;
+}
+
+
+/*MAIN PAGE*/
+.user_info{
+    width:100%;
+    height:100vh;
+    background-color:#fff;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.profession-info{
+    width:100%;
+    display:flex;
+    align-items: center;
+    height: 100vh;
+}
+.profession-block{
+    width:30%;
+    display:flex;
+    position:relative;
+}
+.profession-info.left-block{
+    padding-left:15%;
+    justify-content: flex-start;
+}
+.profession-info.right-block{
+    padding-right: 15%;
+    justify-content: flex-end;
+}
+figure.profession-photo{
+    width:100%;
+}
+figure>img{
+    width:100%;
+}
+a.show-profession{
+    position: absolute;
+    bottom:0px;
+    right:0px;
+}
+.banner-info{
+    padding: 50px;
+    width: 50%;
+    background-blend-mode: difference;
+    background-color: #212121;
+    border: 1px solid #939393;
+    border-radius: 10px;
+    position: relative;
+}
+.user_info_about dt.col-md-5{
+    padding-left:0px;
+}
+.photo_user{
+    width:100%;
+}
+.photo_user img{
+    width:100%;
+    background-color: white;
+    border-radius: 50%;
+    border:0px;
+}
+a.edit-info{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: white;
+    font-size: 12px;
+}
+.end-user-info{
+    background-color: #1b1b1b;
+    margin-top:80px;
+    padding:150px 0px;
+}
+/*MAIN PAGE*/
+
+
+/*PROFESSION PAGE*/
+.profession{
+    margin-top:100px;
+    display: flex;
+    align-items: center;
+}
+.profession-details{
+    padding: 30px;
+    background-color: #0f0f0f;
+}
+.profession-details.main-photo{
+    width:100%;
+    
+}
+
+/*PROFESSION PAGE (END)*/
+
+
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container {
+    width:100%;
+    padding: 0px;
+}
+
+.footer {
+    height: 60px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+    content: /*"\e114"*/ "\e152";
+}
+
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view th {
+    white-space: nowrap;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+/* align the logout "link" (button in form) of the navbar */
+.nav li > form > button.logout {
+    padding: 15px;
+    border: none;
+}
+
+@media(max-width:767px) {
+    .nav li > form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 15px;
+    }
+}
+
+.nav > li > form > button.logout:focus,
+.nav > li > form > button.logout:hover {
+    text-decoration: none;
+}
+
+.nav > li > form > button.logout:focus {
+    outline: none;
+}
