@@ -25,6 +25,7 @@ class UsersController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->image=UploadedFile::getInstance($model, 'image');
             if($model->addInfo()){
+                $model = User::findIdentity($id);
                 $profession = Profession::find()->where(['user_id' => $id])->all();
                 return $this->render('about', ['model' => $model, 'profession'=>$profession,]);
             }

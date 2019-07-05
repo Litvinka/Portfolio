@@ -1,31 +1,28 @@
 <?php
-	use yii\helpers\Html;
-	use yii\helpers\Url;
+
+$session = Yii::$app->session;
+use yii\helpers\Html;
+use yii\helpers\Url;
+
+$this->title=$model->surname." ".$model->name;
+$session['br_user_name']=['label'=>$this->title, 'url'=>['users/about','id'=>$model->id]];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="user_info">
 	<div class="banner-info">
-		<div class="col-md-3">
-			<figure class="photo_user">
-				<img src="<?=Html::encode($model->photo)?>">
-			</figure>
-		</div>
-		<div class="col-md-9">
-			<?=Html::encode($model->surname)?> <?=Html::encode($model->name)?> <?=Html::encode($model->patronumic)?>
+		<div class="photo_user" style="background-image:url(<?=Html::encode($model->photo)?>)"></div>
+		<div>
+			<h3><?=Html::encode($model->surname)?> <?=Html::encode($model->name)?> <?=Html::encode($model->patronumic)?></h3>
 			<dl class="user_info_about">
-				<dt class="col-md-5">Email:</dt>
-				<dd class="col-md-7"><?=Html::encode($model->email)?></dd>
-				<dt class="col-md-5">Город:</dt>
-				<dd class="col-md-7"><?=Html::encode($model->city->name)?></dd>
-				<dt class="col-md-5">Дата рождения:</dt>
-				<dd class="col-md-7"><?=Html::encode($model->bithday)?></dd>
+				<div><dt>Email:</dt><dd><?=Html::encode($model->email)?></dd></div>
+				<div><dt>Город:</dt><dd><?=Html::encode($model->city->name)?></dd></div>
+				<div><dt>Дата рождения:</dt><dd><?=Html::encode($model->bithday)?></dd></div>
 				<?php if(Html::encode($model->phone)){?>
-					<dt class="col-md-5">Телефон:</dt>
-					<dd class="col-md-7"><?=Html::encode($model->phone)?></dd>
+				    <div><dt>Телефон:</dt><dd><?=Html::encode($model->phone)?></dd></div>
 				<?php }?>
 				<?php if(Html::encode($model->about)){?>
-					<dt class="col-md-5">О себе:</dt>
-					<dd class="col-md-7"><?=Html::encode($model->about)?></dd>
+					<div><dt>О себе:</dt><dd><?=Html::encode($model->about)?></dd></div>
 				<?php }?>
 			</dl>
 		</div>
@@ -34,30 +31,29 @@
 </div>
 
 
-<?php 
-	$i=0;
-	foreach ($profession as $key => $value) { 
-?>
+<div class="all-profession">
+    <h2>Виды деятельности</h2>
 
-	<div class="profession-info <?php echo (($i%2) == 0) ? "left-block" : "right-block"; ?>">
-		<div class="profession-block">
-			<figure class="profession-photo">
-				<figcaption><?=Html::encode($value->name)?></figcaption>
-				<img src="<?=Html::encode($value->main_photo)?>">
-			</figure>
-			<a href="<?=Url::to(['profession/view','id'=>$value->id])?>" class="show-profession">Просмотреть</a>
+    <div class="profession-info">
+    <?php 
+        $i=0;
+        foreach ($profession as $key => $value) { 
+    ?>
+		<div class="profession-block" style="background-image:url(<?=Html::encode($value->main_photo)?>)">
+            <div class="block-on-background"></div>
+            <h4><?=Html::encode($value->name)?></h4>
+            <h5></h5>
+			<a href="<?=Url::to(['profession/view','id'=>$value->id])?>" class="show-profession"><img src="/portfolio/web/files/right.png"></a>
 		</div>
-	</div>
-
 <?php
 	$i++;
  } ?>
+    </div>
 
-
-	<a href="<?=Url::to(['profession/create'])?>" class="btn btn-success">Добавить род деятельности</a>
-
-
-
-<div class="end-user-info">
-
+    <div>
+        <a href="<?=Url::to(['profession/create'])?>" class="btn-add"><img src="/portfolio/web/files/plus.png"></a>
+    </div>
+    
 </div>
+	
+

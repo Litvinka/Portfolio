@@ -3,12 +3,12 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
-    <h1><?=Yii::$app->view->title?></h1>
 
     <?php $form=ActiveForm::begin(['id'=>'add-activity','options' => ['enctype' => 'multipart/form-data']]);  ?>
-
+    <h2><?=Yii::$app->view->title?></h2>
     <?=$form->field($model, 'user_id', ['options' => ['tag' => false], 'template' => '{input}'])->hiddenInput()?>
     <?=$form->field($model,'name')?>
     <?=$form->field($model,'skills')->textarea(['rows' => '4']) ?>
@@ -18,7 +18,9 @@ use yii\widgets\ActiveForm;
     <?=$form->field($model,'about')->textarea(['rows' => '4']) ?>
     <?=$form->field($model,'visibility_id')->dropDownList($model->allVisibility(), 
             array('prompt'=>'--Выберите видимость--')) ?>
-    <?=Html::submitButton('Добавить',['class'=>'btn btn-primary'])?>
+    <div class="div-form-button">
+    <?=Html::submitButton('Добавить',['class'=>'form-button'])?>
+    </div>
 
     <?php ActiveForm::end(); ?>
 </div>

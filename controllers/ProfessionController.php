@@ -10,6 +10,7 @@ use app\models\User;
 use app\models\Profession;
 use yii\web\UploadedFile;
 use app\models\Elements;
+use yii\data\ActiveDataProvider;
 
 class ProfessionController extends Controller
 {
@@ -49,8 +50,13 @@ class ProfessionController extends Controller
     //Details of profession
     public function actionView($id){
     	$model=Profession::find()->where(['id'=>$id])->one();
-        $elements=Elements::find()->where(['profession_id'=>$id])->all();
-    	return $this->render('view',['model'=>$model,'elements'=>$elements]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Elements::find()->where(['profession_id'=>$id]),
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+    	return $this->render('view',['model'=>$model,'dataProvider'=>$dataProvider]);
     }
 
 }

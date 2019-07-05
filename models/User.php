@@ -146,7 +146,7 @@ class User extends ActiveRecord implements IdentityInterface
             $this->image->saveAs(Yii::getAlias('@webroot') . '/files/users_photo/' . $this->image->name);
         }
         else{
-            $this->photo="";
+            $user->photo=$this->photo;
         }
         return ($user->save()) ? $user : null;
     }

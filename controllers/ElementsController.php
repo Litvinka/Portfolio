@@ -37,4 +37,9 @@ class ElementsController extends Controller
         return $this->render('create',['model'=>$model]);
     }
     
+    public function actionView($id){
+        $model=Elements::find()->where(['id'=>$id])->one();
+        return $this->render('view',['model'=>$model]);
+    }
+    
 }
