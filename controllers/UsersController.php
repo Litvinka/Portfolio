@@ -39,9 +39,6 @@ class UsersController extends Controller
 
 
     public function actionAbout($id){
-    	if (Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
         $model = User::find()->where(['id'=>$id])->one();
         $profession = Profession::find()->where(['user_id' => $id])->all();
     	return $this->render('about', [

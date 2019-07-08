@@ -26,7 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
 				<?php }?>
 			</dl>
 		</div>
+        
+        <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->id==$model->id){ ?>
 		<a href="<?=Url::to(['users/edit', 'id' => $model->id])?>" class="edit-info">Редактировать</a>
+        <?php } ?>
+        
 	</div>
 </div>
 
@@ -50,9 +54,11 @@ $this->params['breadcrumbs'][] = $this->title;
  } ?>
     </div>
 
+    <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->id==$model->id){ ?>
     <div>
         <a href="<?=Url::to(['profession/create'])?>" class="btn-add"><img src="/portfolio/web/files/plus.png"></a>
     </div>
+    <?php } ?>
     
 </div>
 	

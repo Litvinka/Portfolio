@@ -35,9 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     
+    <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->id==$model->user_id){ ?>
     <div class="prof-button-add">
         <a href="<?=Url::to(['elements/create','profession_id'=>$model->id])?>" class="btn-add"><img src="/portfolio/web/files/plus.png"></a>
     </div>
+    <?php } ?>
     
 </div>
 
@@ -55,7 +57,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ]);
     ?>
     
+    <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->id==$model->user_id){ ?>
     <div>
         <a href="<?=Url::to(['elements/create','profession_id'=>$model->id])?>" class="btn-add"><img src="/portfolio/web/files/plus.png"></a>
     </div>
+    <?php } ?>
 </div>
