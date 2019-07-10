@@ -6,7 +6,7 @@ use yii\helpers\Url;
 use yii\widgets\ListView;
 
 $this->title=Html::encode($model->name);
-$session['br_user_profession']=['label'=>$this->title, 'url'=>['profession/view','id'=>$model->id]];
+$session['br_user_profession'] = $model->SetBreadcrumbs();
 $this->params['breadcrumbs'][] = $session['br_user_name'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

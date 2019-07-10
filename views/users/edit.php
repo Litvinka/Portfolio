@@ -3,7 +3,7 @@
 $session = Yii::$app->session;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\date\DatePicker;
+use dosamigos\ckeditor\CKEditor;
 
 $this->params['breadcrumbs'][] = $session['br_user_name'];
 $this->params['breadcrumbs'][] = $this->title;
@@ -20,13 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
             array('prompt'=>'--Выберите пол--')) ?>
         <?=$form->field($model,'city_id')->dropDownList($model->AllCity(), 
             array('prompt'=>'--Выберите город--')) ?>
-        <?=$form->field($model,'bithday')->widget(DatePicker::classname(), [
-            'type' => DatePicker::TYPE_COMPONENT_PREPEND,
-            'pluginOptions' => [
-                'autoclose'=>true,
-                'format' => 'dd.mm.yyyy'
-            ]
-        ])?>
         <?=$form->field($model,'phone')?>
         <?=$form->field($model,'photo')->hiddenInput()->label(false)?>
         <label class="control-label" for="user-image">Фото</label>
@@ -36,7 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <?php } ?>
         <?=$form->field($model,'image')->fileInput(['accept' => 'image/*'])->label(false)?>
-        <?=$form->field($model,'about')->textarea(['rows' => '4']) ?>
+        <?=$form->field($model,'about')->widget(CKEditor::className(), [
+            'options' => ['rows' => 8],
+            'preset' => 'basic'
+        ]) ?>
         <div class="div-form-button">
         <?=Html::submitButton('Сохранить',['class'=>'form-button'])?>
         </div>

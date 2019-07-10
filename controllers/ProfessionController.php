@@ -56,6 +56,10 @@ class ProfessionController extends Controller
                 'pageSize' => 12,
             ],
         ]);
+        if(!isset($session['br_user_name'])){
+            $session = Yii::$app->session;
+            $session['br_user_name']=$model->user->SetBreadcrumbs();
+        }
     	return $this->render('view',['model'=>$model,'dataProvider'=>$dataProvider]);
     }
 

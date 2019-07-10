@@ -32,9 +32,12 @@ class Profession extends \yii\db\ActiveRecord
         return 'profession';
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    //set breadcrumbs profession
+    public function SetBreadcrumbs(){
+        return ['label'=>$this->name, 'url'=>['profession/view','id'=>$this->id]];
+    }
+    
+    
     public function rules()
     {
         return [

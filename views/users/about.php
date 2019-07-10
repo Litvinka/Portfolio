@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->title=$model->surname." ".$model->name;
-$session['br_user_name']=['label'=>$this->title, 'url'=>['users/about','id'=>$model->id]];
+$session['br_user_name']=$model->SetBreadcrumbs();
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -17,12 +17,11 @@ $this->params['breadcrumbs'][] = $this->title;
 			<dl class="user_info_about">
 				<div><dt>Email:</dt><dd><?=Html::encode($model->email)?></dd></div>
 				<div><dt>Город:</dt><dd><?=Html::encode($model->city->name)?></dd></div>
-				<div><dt>Дата рождения:</dt><dd><?=Html::encode($model->bithday)?></dd></div>
 				<?php if(Html::encode($model->phone)){?>
 				    <div><dt>Телефон:</dt><dd><?=Html::encode($model->phone)?></dd></div>
 				<?php }?>
 				<?php if(Html::encode($model->about)){?>
-					<div><dt>О себе:</dt><dd><?=Html::encode($model->about)?></dd></div>
+					<div><dt>О себе:</dt><dd><?=htmlspecialchars_decode($model->about)?></dd></div>
 				<?php }?>
 			</dl>
 		</div>

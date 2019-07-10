@@ -17,7 +17,6 @@ use yii\helpers\ArrayHelper;
  * @property string $surname
  * @property string $name
  * @property string $patronumic
- * @property string $bithday
  * @property string $phone
  * @property string $about
  * @property string $photo
@@ -40,6 +39,10 @@ use yii\helpers\ArrayHelper;
 class User extends ActiveRecord implements IdentityInterface
 {
     public $image;
+    
+    public function SetBreadcrumbs(){
+        return ['label'=>$this->surname." ".$this->name, 'url'=>['users/about','id'=>$this->id]];
+    }
 
     public static function findIdentity($id)
     {
@@ -96,8 +99,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['surname', 'name', 'bithday', 'city_id', 'gender_id'], 'required'],
-            [['bithday'], 'safe'],
+            [['surname', 'name', 'city_id', 'gender_id'], 'required'],
             [['about','photo'], 'string'],
             [['image'], 'file', 'extensions' => 'jpg'],
             [['city_id', 'gender_id'], 'integer'],
@@ -117,7 +119,6 @@ class User extends ActiveRecord implements IdentityInterface
             'surname' => 'Фамилия',
             'name' => 'Имя',
             'patronumic' => 'Отчество',
-            'bithday' => 'Дата рождения',
             'phone' => 'Телефон',
             'about' => 'О себе',
             'photo' => 'Фото',
@@ -135,7 +136,6 @@ class User extends ActiveRecord implements IdentityInterface
         $user->surname=$this->surname;
         $user->name=$this->name;
         $user->patronumic=$this->patronumic;
-        $user->bithday=$this->bithday;
         $user->phone=$this->phone;
         $user->about=$this->about;
         $user->bithday=date('Y-m-d', strtotime($this->bithday));

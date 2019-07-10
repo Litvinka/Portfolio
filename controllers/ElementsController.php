@@ -39,6 +39,11 @@ class ElementsController extends Controller
     
     public function actionView($id){
         $model=Elements::find()->where(['id'=>$id])->one();
+        if(!isset($session['br_user_name'])){
+            $session = Yii::$app->session;
+            $session['br_user_name']=$model->profession->user->SetBreadcrumbs();
+            $session['br_user_profession']=$model->profession->SetBreadcrumbs();
+        }
         return $this->render('view',['model'=>$model]);
     }
     
