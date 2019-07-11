@@ -14,7 +14,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <div class="details-prof">
-
+    
+    <div class="element-group-btn">
+         <a href="<?=Url::to(['element/create','id'=>$model->id])?>"><img src="/portfolio/web/files/edit.png"></a>
+         <a href="<?=Url::to(['element/delete','id'=>$model->id])?>"><img src="/portfolio/web/files/delete.png"></a>
+    </div>
+    
     <div class="details-prof-photos" >
         <div class="prof-l-img" style="background-image:url(<?=Html::encode($model->main_photo)?>)"></div>
         <div class="prof-s-img"></div>

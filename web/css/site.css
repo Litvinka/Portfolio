@@ -335,6 +335,7 @@ div.profession-list-block{
     border-radius: 20px;
     justify-content: space-between;
     background-color: white;
+    position: relative;
 }
 .details-prof-photos{
     display: flex;
@@ -357,6 +358,15 @@ div.profession-list-block{
 .details-prof-about h2{
     color: #292929;
     text-align: left;
+}
+.element-group-btn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.element-group-btn img{
+    width:40px;
+    height:40px;
 }
 /*Element page*/
 

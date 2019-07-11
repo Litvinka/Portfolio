@@ -41,6 +41,9 @@ class UsersController extends Controller
     public function actionAbout($id){
         $model = User::find()->where(['id'=>$id])->one();
         $profession = Profession::find()->where(['user_id' => $id])->all();
+        if(Yii::$app->user->isGuest || Yii::$app->user->identity->id!=$model->id){
+            $profession = Profession::find()->where(['user_id' => $id, 'visibility_id' => '1'])->all();
+        }
     	return $this->render('about', [
             'model' => $model, 'profession'=>$profession,
         ]);
