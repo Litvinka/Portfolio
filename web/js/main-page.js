@@ -13,3 +13,16 @@ $(document).ready(function($){
 });
 
 
+
+//MODAL SCRIPT
+$(".delete-btn-a").click(function(e){
+    $(".background-modal").css("display", "flex").hide().fadeIn();
+});
+
+$(".background-modal").click(function(e){
+    if (e.target !== this){
+        return;
+    }
+    $(".background-modal").fadeOut();
+});
+//MODAL SCRIPT (END)

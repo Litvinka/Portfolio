@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="block-on-background"></div>
             <h4><?=Html::encode($value->name)?></h4>
             <h5></h5>
-			<a href="<?=Url::to(['profession/view','id'=>$value->id])?>" class="show-profession"><img src="/portfolio/web/files/right.png"></a>
+			<a href="<?=Url::to(['profession/view','id'=>$value->id])?>" class="show-profession"><img src="files/right.png"></a>
 		</div>
 <?php
 	$i++;
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->id==$model->id){ ?>
     <div>
-        <a href="<?=Url::to(['profession/create'])?>" class="btn-add"><img src="/portfolio/web/files/plus.png"></a>
+        <a href="<?=Url::to(['profession/create'])?>" class="btn-add"><img src="files/plus.png"></a>
     </div>
     <?php } ?>
     

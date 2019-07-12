@@ -53,6 +53,7 @@ $config = [
         ],
         */
     ],
+    'defaultRoute' => 'site/login',
     'params' => $params,
 ];
 

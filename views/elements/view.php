@@ -4,6 +4,7 @@ $session = Yii::$app->session;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ListView;
+use yii\widgets\ActiveForm;
 
 $this->title=Html::encode($model->name);
 $session['br_user_elsement']=['label'=>$this->title, 'url'=>['elements/view','id'=>$model->id]];
@@ -13,12 +14,25 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
+<div class="background-modal">
+    <div class="modal-window">
+        <p>Вы уверены, что хотите удалить элемент?</p>
+        <?php $form = ActiveForm::begin(['action' => 'index.php?r=elements/delete','options' => ['method' => 'post']]) ?>
+            <input type="hidden" name="id" value="<?=$model->id?>">
+            <input type="submit" value="Удалить">
+        <?php $form = ActiveForm::end()?>
+    </div>
+</div>
+
 <div class="details-prof">
     
+    <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->id==$model->profession->user_id){ ?>
     <div class="element-group-btn">
-         <a href="<?=Url::to(['element/create','id'=>$model->id])?>"><img src="/portfolio/web/files/edit.png"></a>
-         <a href="<?=Url::to(['element/delete','id'=>$model->id])?>"><img src="/portfolio/web/files/delete.png"></a>
+         <a href="<?=Url::to(['elements/create','id'=>$model->id])?>"><img src="files/edit.png"></a>
+        
+         <a href="#" class="delete-btn-a"><img src="files/delete.png"></a>
     </div>
+    <?php } ?>
     
     <div class="details-prof-photos" >
         <div class="prof-l-img" style="background-image:url(<?=Html::encode($model->main_photo)?>)"></div>

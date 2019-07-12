@@ -21,13 +21,8 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'about', 'signup', 'login'],
+                'only' => ['logout', 'about'],
                 'rules' => [
-                    [
-                        'actions' => ['login','signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
                     [
                         'actions' => ['logout','about'],
                         'allow' => true,
@@ -38,9 +33,7 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+
     public function actions()
     {
         return [
@@ -54,11 +47,7 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
+
     public function actionIndex()
     {
         return $this->render('index');
@@ -67,6 +56,9 @@ class SiteController extends Controller
 
     public function actionSignup()
     {
+        if (!Yii::$app->user->isGuest) {
+            return $this->redirect(array('/users/about','id'=>Yii::$app->user->identity->id));
+        }
         $model = new SignupForm(); 
         if ($model->load(Yii::$app->request->post())) { 
             if ($user = $model->signup()) { // Регистрация
@@ -81,13 +73,11 @@ class SiteController extends Controller
     }
 
 
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
     public function actionLogin()
     {
+        if (!Yii::$app->user->isGuest) {
+            return $this->redirect(array('/users/about','id'=>Yii::$app->user->identity->id));
+        }
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $user=User::findByEmail($model->email);
@@ -106,22 +96,12 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
     public function actionLogout()
     {
         Yii::$app->user->logout();
         return $this->goHome();
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
     public function actionAbout()
     {
         return $this->render('about');

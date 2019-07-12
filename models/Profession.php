@@ -6,23 +6,7 @@ use Yii;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
-/**
- * This is the model class for table "profession".
- *
- * @property int $id
- * @property string $name
- * @property int $user_id
- * @property int $experience_id
- * @property string $skills
- * @property string $main_photo
- * @property string $about
- * @property int $visibility_id
- *
- * @property Elements[] $elements
- * @property Experience $experience
- * @property User $user
- * @property Visibility $visibility
- */
+
 class Profession extends \yii\db\ActiveRecord
 {
     public $image;
@@ -80,8 +64,9 @@ class Profession extends \yii\db\ActiveRecord
         $profession->visibility_id=$this->visibility_id;
         $profession->about=$this->about;
         if($this->image!=null){
-            $profession->main_photo=Yii::$app->request->baseUrl.'/files/profession/'.$this->image->name;
-            $this->image->saveAs(Yii::getAlias('@webroot') . '/files/profession/' . $this->image->name);
+            $newfilename = date('dmYHis').'_'.str_replace(" ", "", $this->image->name);
+            $profession->main_photo='files/profession/'.$newfilename;
+            $this->image->saveAs(Yii::getAlias('@webroot') . '/files/profession/'.$newfilename);
         }
         return ($profession->save()) ? $profession : null;
     }

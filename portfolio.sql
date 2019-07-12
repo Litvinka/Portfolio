@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Мар 15 2019 г., 14:28
+-- Время создания: Июл 12 2019 г., 13:20
 -- Версия сервера: 10.1.25-MariaDB
 -- Версия PHP: 7.0.21
 
@@ -83,8 +83,7 @@ CREATE TABLE `elements` (
 --
 
 INSERT INTO `elements` (`id`, `name`, `profession_id`, `main_photo`, `about`) VALUES
-(1, 'Тест', 5, NULL, 'Описание тестового'),
-(2, 'тест 2', 5, '/portfolio/web/files/elements/2.jpg', 'опісаніе к тест 2');
+(3, 'тест 2', 5, '/portfolio/web/files/elements/XSC_0261.jpg', '');
 
 -- --------------------------------------------------------
 
@@ -108,6 +107,16 @@ CREATE TABLE `experience` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `experience`
+--
+
+INSERT INTO `experience` (`id`, `name`) VALUES
+(1, 'Нет опыта'),
+(2, 'От 1 до 3 лет'),
+(3, 'От 3 до 6 лет'),
+(4, 'Более 6 лет');
 
 -- --------------------------------------------------------
 
@@ -181,7 +190,7 @@ CREATE TABLE `profession` (
 
 INSERT INTO `profession` (`id`, `name`, `user_id`, `experience_id`, `skills`, `main_photo`, `about`, `visibility_id`) VALUES
 (5, 'Веб-программирование', 3, NULL, '', '/portfolio/web/files/profession/8.jpg', '', 1),
-(6, 'Фотография', 3, NULL, '', '/portfolio/web/files/profession/6.jpg', '', 1);
+(6, 'Фотография', 3, NULL, '', '/portfolio/web/files/profession/6.jpg', '', 2);
 
 -- --------------------------------------------------------
 
@@ -245,7 +254,6 @@ CREATE TABLE `user` (
   `surname` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `patronumic` varchar(255) DEFAULT NULL,
-  `bithday` date DEFAULT NULL,
   `phone` varchar(45) DEFAULT NULL,
   `about` text,
   `photo` text,
@@ -253,7 +261,7 @@ CREATE TABLE `user` (
   `gender_id` int(11) DEFAULT NULL,
   `role_id` int(11) NOT NULL,
   `auth_key` varchar(32) NOT NULL,
-  `password_hash` varchar(255) DEFAULT NULL,
+  `password_hash` varchar(255) NOT NULL,
   `status_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
@@ -263,8 +271,8 @@ CREATE TABLE `user` (
 -- Дамп данных таблицы `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `surname`, `name`, `patronumic`, `bithday`, `phone`, `about`, `photo`, `city_id`, `gender_id`, `role_id`, `auth_key`, `password_hash`, `status_id`, `created_at`, `updated_at`) VALUES
-(3, 'dolbichmaryja@gmail.com', 'Фамилия', 'Имя', 'Отчество', '1970-01-01', '', '', '/portfolio/web/files/users_photo/5.jpg', 5, 2, 2, 'BIFLTulCiL0QSrj93oKsBabjfGnVt7tm', '$2y$13$nnvjxU.h6/BOVT.U3erDN.pM6sndJpO/PoumN3LPfXCXxBfa0Gkci', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `user` (`id`, `email`, `surname`, `name`, `patronumic`, `phone`, `about`, `photo`, `city_id`, `gender_id`, `role_id`, `auth_key`, `password_hash`, `status_id`, `created_at`, `updated_at`) VALUES
+(3, 'dolbichmaryja@gmail.com', 'Фамилия', 'Имя', 'Отчество', '', '', '/portfolio/web/files/users_photo/5.jpg', 5, 2, 2, 'BIFLTulCiL0QSrj93oKsBabjfGnVt7tm', '$2y$13$nnvjxU.h6/BOVT.U3erDN.pM6sndJpO/PoumN3LPfXCXxBfa0Gkci', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -376,7 +384,6 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id_UNIQUE` (`id`),
   ADD UNIQUE KEY `email_UNIQUE` (`email`),
-  ADD UNIQUE KEY `password_hash_UNIQUE` (`password_hash`),
   ADD KEY `fk_Users_Role1_idx` (`role_id`),
   ADD KEY `fk_Users_Gender1_idx` (`gender_id`),
   ADD KEY `fk_Users_City1_idx` (`city_id`),
@@ -406,7 +413,7 @@ ALTER TABLE `country`
 -- AUTO_INCREMENT для таблицы `elements`
 --
 ALTER TABLE `elements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `element_tags`
 --
@@ -416,7 +423,7 @@ ALTER TABLE `element_tags`
 -- AUTO_INCREMENT для таблицы `experience`
 --
 ALTER TABLE `experience`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `gender`
 --

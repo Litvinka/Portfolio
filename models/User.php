@@ -138,12 +138,12 @@ class User extends ActiveRecord implements IdentityInterface
         $user->patronumic=$this->patronumic;
         $user->phone=$this->phone;
         $user->about=$this->about;
-        $user->bithday=date('Y-m-d', strtotime($this->bithday));
         $user->city_id=$this->city_id;
         $user->gender_id=$this->gender_id;
         if($this->image){
-            $user->photo=Yii::$app->request->baseUrl.'/files/users_photo/'.$this->image->name;
-            $this->image->saveAs(Yii::getAlias('@webroot') . '/files/users_photo/' . $this->image->name);
+            $newfilename = date('dmYHis').'_'.str_replace(" ", "", $this->image->name);
+            $user->photo='files/users_photo/'.$newfilename;
+            $this->image->saveAs(Yii::getAlias('@webroot') . '/files/users_photo/' . $newfilename);
         }
         else{
             $user->photo=$this->photo;

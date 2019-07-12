@@ -29,6 +29,12 @@ h2{
 h3{
     font-weight: bold;
 }
+.form-control{
+    font-weight: bold;
+    font-size: 15px;
+    padding: 8px 14px;
+    height: 38px;
+}
 
 
 /*HEADER*/
@@ -45,6 +51,7 @@ nav.main-nav{
 nav ul.nav-right-block{
     display: flex;
     margin-bottom: 0px;
+    flex-wrap: wrap;
 }
 nav ul.nav-right-block li{
     list-style-type: none;
@@ -122,7 +129,7 @@ div.div-form-button{
     margin-top: 20px;
 }
 .form-group{
-    margin-bottom:0px;
+    margin-bottom:15px;
 }
 .form-control{
     border-radius: 20px;
@@ -363,12 +370,50 @@ div.profession-list-block{
     position: absolute;
     top: 10px;
     right: 10px;
+    display: flex;
+}
+.element-group-btn a:last-child{
+    margin-left:10px;
 }
 .element-group-btn img{
     width:40px;
     height:40px;
 }
 /*Element page*/
+
+
+/*Modal window*/
+.background-modal{
+    position: fixed;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    background-color: #383838b0;
+    z-index: 10;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.modal-window{
+    background-color: white;
+    width: 400px;
+    padding: 20px 40px;
+    color: #292929;
+    font-weight: bold;
+    border-radius:20px;
+}
+.modal-window form{
+    width:100%;
+    margin:unset;
+    background-color: white;
+    padding: 10px 0px;
+    display: flex;
+    justify-content: flex-end;
+}
+/*Modal window (end)*/
+
+
 
 div.container {
     width:100%;
@@ -422,6 +467,53 @@ footer .copy-h6{
     div.profession-block:last-child{
         margin:0px;
     }
+    
+    /*PROFESSION PAGE*/
+    .profession{
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 80px 0px 60px 0px;
+    }
+    .prof-header{
+        width: 100%;
+        flex-wrap: wrap;
+        padding-left: 55px;
+        margin-bottom: 20px;
+    }
+    div.prof-photo{
+        width: 100%;
+        min-height: 200px;
+        margin-left: 0px;
+        margin-bottom: 20px;
+    }
+    .one-prof{
+        width: 46%;
+        margin: 2%;
+    }
+    /*PROFESSION PAGE (END)*/
+    
+    /*Element page*/
+    .details-prof{
+        flex-wrap: wrap;
+        padding: 30px;
+    }
+    .details-prof-photos{
+        width: 100%;
+    }
+    .details-prof-about{
+        width: 100%;
+        margin-top: 20px;
+    }
+    .prof-l-img {
+        height: 200px;
+    }
+    .details-prof-about h2 {
+        margin-bottom: 20px;
+    }
+    /*Element page*/
+    
+    
 }
 
 

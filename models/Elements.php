@@ -59,8 +59,9 @@ class Elements extends \yii\db\ActiveRecord
         $elements->profession_id=$this->profession_id;
         $elements->about=$this->about;
         if($this->image!=null){
-            $elements->main_photo=Yii::$app->request->baseUrl.'/files/elements/'.$this->image->name;
-            $this->image->saveAs(Yii::getAlias('@webroot') . '/files/elements/' . $this->image->name);
+            $newfilename = date('dmYHis').'_'.str_replace(" ", "", $this->image->name);
+            $elements->main_photo='files/elements/'.$newfilename;
+            $this->image->saveAs(Yii::getAlias('@webroot') . '/files/elements/' . $newfilename);
         }
         return ($elements->save()) ? $elements : null;
     }
