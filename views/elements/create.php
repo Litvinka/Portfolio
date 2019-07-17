@@ -19,7 +19,15 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <?=$form->field($model, 'profession_id', ['options' => ['tag' => false], 'template' => '{input}'])->hiddenInput()?>
     <?=$form->field($model,'name')?>
-    <?=$form->field($model,'image')->fileInput(['accept'=>'image/*'])?>
+    <label class="control-label" for="elements-image">Картинка</label>
+    <?php if($model->main_photo){?>
+        <div class="form-edit-photo">
+            <img src="<?=$model->main_photo?>"?>
+        </div>
+    <?php } ?>
+    <?=$form->field($model,'image')->fileInput(['accept'=>'image/*'])->label(false)?>
+    <label class="control-label" for="elements-image">Добавить дополнительные фото</label>
+    <?=$form->field($model,'photos[]')->fileInput(['accept'=>'image/*','multiple' => true])->label(false)?>
     <?=$form->field($model,'about')->widget(CKEditor::className(), [
         'options' => ['rows' => 8],
         'preset' => 'basic'

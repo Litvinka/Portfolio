@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->id==$model->profession->user_id){ ?>
     <div class="element-group-btn">
-         <a href="<?=Url::to(['elements/create','id'=>$model->id])?>"><img src="files/edit.png"></a>
+         <a href="<?=Url::to(['elements/edit','id'=>$model->id])?>"><img src="files/edit.png"></a>
         
          <a href="#" class="delete-btn-a"><img src="files/delete.png"></a>
     </div>
@@ -47,3 +47,16 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 </div>
+
+
+
+<?php echo ListView::widget([
+        'id' => 'all-elements-photo',
+        'dataProvider' => $dataProvider,
+        'itemView' => '_elements',
+        'itemOptions' => [
+            'tag' => false,
+        ],
+        'summary' => false,
+    ]);
+?>

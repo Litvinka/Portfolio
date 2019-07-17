@@ -14,7 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?=$form->field($model,'skills')->textarea(['rows' => '4']) ?>
     <?=$form->field($model,'experience_id')->dropDownList($model->allExperience(), 
             array('prompt'=>'--Выберите опыт работы--')) ?>
-    <?=$form->field($model,'image')->fileInput(['accept' => 'image/*'])?>
+    <label class="control-label" for="profession-image">Картинка</label>
+    <?=$form->field($model,'image')->fileInput(['accept' => 'image/*'])->label(false)?>
     <?=$form->field($model,'about')->textarea(['rows' => '4']) ?>
     <?=$form->field($model,'visibility_id')->dropDownList($model->allVisibility(), 
             array('prompt'=>'--Выберите видимость--')) ?>

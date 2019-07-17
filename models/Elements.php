@@ -3,33 +3,20 @@
 namespace app\models;
 
 use Yii;
+use app\models\PhotoElements;
 
-/**
- * This is the model class for table "elements".
- *
- * @property int $id
- * @property string $name
- * @property int $profession_id
- * @property string $main_photo
- * @property string $about
- *
- * @property ElementTags[] $elementTags
- * @property Profession $profession
- * @property PhotoElements[] $photoElements
- */
+
 class Elements extends \yii\db\ActiveRecord
 {
     
     public $image;
+    public $photos;
     
     public static function tableName()
     {
         return 'elements';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -63,29 +50,34 @@ class Elements extends \yii\db\ActiveRecord
             $elements->main_photo='files/elements/'.$newfilename;
             $this->image->saveAs(Yii::getAlias('@webroot') . '/files/elements/' . $newfilename);
         }
-        return ($elements->save()) ? $elements : null;
+        if($elements->save()){
+            if($this->photos!=null){
+                foreach($this->photos as $ph){
+                    $newfilename = date('dmYHis').'_'.str_replace(" ", "", $ph->name);
+                    $photoElement = new PhotoElements();
+                    $photoElement->element_id = $elements->id;
+                    $photoElement->link = 'files/elements/'.$newfilename;
+                    $photoElement->save();
+                    $ph->saveAs(Yii::getAlias('@webroot') . '/files/elements/' . $newfilename);
+                }
+            }
+        }
+        else{
+            return null;
+        }
+        return $elements;
     }
     
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getElementTags()
     {
         return $this->hasMany(ElementTags::className(), ['element_id' => 'id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getProfession()
     {
         return $this->hasOne(Profession::className(), ['id' => 'profession_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getPhotoElements()
     {
         return $this->hasMany(PhotoElements::className(), ['element_id' => 'id']);

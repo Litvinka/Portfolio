@@ -7,7 +7,9 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Responce;
 use app\models\Elements;
+use app\models\PhotoElements;
 use yii\web\UploadedFile;
+use yii\data\ActiveDataProvider;
 
 
 class ElementsController extends Controller
@@ -35,6 +37,7 @@ class ElementsController extends Controller
         $model=new Elements();
         if($model->load(Yii::$app->request->post())){
             $model->image=UploadedFile::getInstance($model,'image');
+            $model->photos=UploadedFile::getInstances($model,'photos');
             $model->profession_id=$profession_id;
             if($model->addInfo()){
                 return $this->redirect(['profession/view','id'=>$profession_id]);
@@ -48,12 +51,14 @@ class ElementsController extends Controller
         $model=Elements::find()->where(['id'=>$id])->one();
         if($model->load(Yii::$app->request->post())){
             $model->image=UploadedFile::getInstance($model,'image');
+            $model->photos=UploadedFile::getInstances($model,'photos');
             if($model->addInfo()){
                 return $this->redirect(['profession/view','id'=>$model->profession_id]);
             }
         }
         return $this->render('create',['model'=>$model]);
     }
+    
     
     public function actionView($id){
         $model=Elements::find()->where(['id'=>$id])->one();
@@ -62,7 +67,13 @@ class ElementsController extends Controller
             $session['br_user_name']=$model->profession->user->SetBreadcrumbs();
             $session['br_user_profession']=$model->profession->SetBreadcrumbs();
         }
-        return $this->render('view',['model'=>$model]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => PhotoElements::find()->where(['element_id'=>$id]),
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+        return $this->render('view',['model'=>$model, 'dataProvider'=>$dataProvider]);
     }
     
     

@@ -32,7 +32,7 @@ AppAsset::register($this);
 <div class="wrap">
     <header class="header">
          <nav class="main-nav">
-            <a class="" href="#"><h1>Люстэрка</h1></a>
+            <a class="" href="<?=Yii::$app->homeUrl?>"><h1>Люстэрка</h1></a>
             <div class="">
                 <ul class="nav-right-block">
                 <?php if(Yii::$app->user->isGuest){ ?>
