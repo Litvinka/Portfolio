@@ -11,6 +11,7 @@ class Elements extends \yii\db\ActiveRecord
     
     public $image;
     public $photos;
+    public $tags;
     
     public static function tableName()
     {
@@ -41,32 +42,59 @@ class Elements extends \yii\db\ActiveRecord
         if(!$this->validate()){
             return null;
         }
-        $elements=new Elements();
-        $elements->name=$this->name;
-        $elements->profession_id=$this->profession_id;
-        $elements->about=$this->about;
         if($this->image!=null){
             $newfilename = date('dmYHis').'_'.str_replace(" ", "", $this->image->name);
-            $elements->main_photo='files/elements/'.$newfilename;
+            $this->main_photo='files/elements/'.$newfilename;
             $this->image->saveAs(Yii::getAlias('@webroot') . '/files/elements/' . $newfilename);
         }
-        if($elements->save()){
+        if($this->save()){
             if($this->photos!=null){
                 foreach($this->photos as $ph){
                     $newfilename = date('dmYHis').'_'.str_replace(" ", "", $ph->name);
                     $photoElement = new PhotoElements();
-                    $photoElement->element_id = $elements->id;
+                    $photoElement->element_id = $this->id;
                     $photoElement->link = 'files/elements/'.$newfilename;
                     $photoElement->save();
                     $ph->saveAs(Yii::getAlias('@webroot') . '/files/elements/' . $newfilename);
                 }
             }
+            $this->setElementTags();
         }
         else{
             return null;
         }
-        return $elements;
+        return true;
     }
+    
+    
+    public function setElementTags()
+    {
+        $tags=explode(',', $this->tags);
+        ElementTags::deleteAll(['element_id' => $this->id]);
+        foreach($tags as $value){
+            $t=new Tags();
+            $t->name=trim($value);
+            $t->addTag();
+            $elementTag=new ElementTags();
+            $elementTag->element_id=$this->id;
+            $elementTag->tag_id=$t->id;
+            $elementTag->save();
+        }
+    }
+    
+    
+    public function getTags(){
+        $str="";
+        $tags=ElementTags::find()->Where(['element_id'=>$this->id])->all();
+        for($i=0;$i<count($tags);++$i){
+            if($i>0 && $i<(count($tags))){
+                $str.=", ";
+            }
+            $str.=$tags[$i]->tag->name;
+        }
+        return $str;
+    }
+    
     
     public function getElementTags()
     {

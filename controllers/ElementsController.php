@@ -38,11 +38,13 @@ class ElementsController extends Controller
         if($model->load(Yii::$app->request->post())){
             $model->image=UploadedFile::getInstance($model,'image');
             $model->photos=UploadedFile::getInstances($model,'photos');
+            $model->tags=htmlspecialchars(trim($_POST['Elements']['tags']));
             $model->profession_id=$profession_id;
             if($model->addInfo()){
                 return $this->redirect(['profession/view','id'=>$profession_id]);
             }
         }
+        Yii::$app->view->title="Добавление элемента";
         return $this->render('create',['model'=>$model]);
     }
     
@@ -52,10 +54,12 @@ class ElementsController extends Controller
         if($model->load(Yii::$app->request->post())){
             $model->image=UploadedFile::getInstance($model,'image');
             $model->photos=UploadedFile::getInstances($model,'photos');
+            $model->tags=htmlspecialchars(trim($_POST['Elements']['tags']));
             if($model->addInfo()){
                 return $this->redirect(['profession/view','id'=>$model->profession_id]);
             }
         }
+        Yii::$app->view->title="Редактирование элемента";
         return $this->render('create',['model'=>$model]);
     }
     

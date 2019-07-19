@@ -13,6 +13,11 @@ $this->params['breadcrumbs'][] = $session['br_user_profession'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<div class="background-galery">
+    <div class="galery-block">
+        <img class="galery-img" src="">
+    </div>
+</div>
 
 <div class="background-modal">
     <div class="modal-window">
@@ -24,33 +29,33 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
-<div class="details-prof">
-    
-    <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->id==$model->profession->user_id){ ?>
-    <div class="element-group-btn">
-         <a href="<?=Url::to(['elements/edit','id'=>$model->id])?>"><img src="files/edit.png"></a>
-        
-         <a href="#" class="delete-btn-a"><img src="files/delete.png"></a>
-    </div>
-    <?php } ?>
-    
-    <div class="details-prof-photos" >
-        <div class="prof-l-img" style="background-image:url(<?=Html::encode($model->main_photo)?>)"></div>
-        <div class="prof-s-img"></div>
-    </div>
-    
-    <div class="details-prof-about">
-        <h2><?=HTML::encode($model->name)?></h2>
-        <div>
-            <?php echo htmlspecialchars_decode($model->about); ?>
+<div class="one-element-block">
+    <div class="details-prof">
+        <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->id==$model->profession->user_id){ ?>
+        <div class="element-group-btn">
+             <a href="<?=Url::to(['elements/edit','id'=>$model->id])?>"><img src="files/edit.png"></a>
+
+             <a href="#" class="delete-btn-a"><img src="files/delete.png"></a>
+        </div>
+        <?php } ?>
+
+        <div class="details-prof-photos" >
+            <div class="prof-l-img" style="background-image:url(<?=Html::encode($model->main_photo)?>)"></div>
+        </div>
+
+        <div class="details-prof-about">
+            <h2><?=HTML::encode($model->name)?></h2>
+            <div>
+                <?php echo htmlspecialchars_decode($model->about); ?>
+            </div>
         </div>
     </div>
-
-</div>
-
-
-
-<?php echo ListView::widget([
+    
+    <?php if($dataProvider->getTotalCount()>0){?>
+    <hr>
+    <?php } ?>
+    
+    <?php echo ListView::widget([
         'id' => 'all-elements-photo',
         'dataProvider' => $dataProvider,
         'itemView' => '_elements',
@@ -58,5 +63,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'tag' => false,
         ],
         'summary' => false,
+        'emptyText' => '',
     ]);
-?>
+    ?>
+    
+</div>  
+
+
+
+
+
+

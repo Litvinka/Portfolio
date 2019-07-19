@@ -5,7 +5,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\ckeditor\CKEditor;
 
-Yii::$app->view->title="Добавление элемента";
 $this->params['breadcrumbs'][] = $session['br_user_name'];
 $this->params['breadcrumbs'][] = $session['br_user_profession'];
 $this->params['breadcrumbs'][] = $this->title;
@@ -28,6 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?=$form->field($model,'image')->fileInput(['accept'=>'image/*'])->label(false)?>
     <label class="control-label" for="elements-image">Добавить дополнительные фото</label>
     <?=$form->field($model,'photos[]')->fileInput(['accept'=>'image/*','multiple' => true])->label(false)?>
+    <label class="control-label" for="tags">Ключевые слова (через запятую)</label>
+    <?=$form->field($model,'tags')->textInput(['value' => $model->getTags()])->label(false)?>
     <?=$form->field($model,'about')->widget(CKEditor::className(), [
         'options' => ['rows' => 8],
         'preset' => 'basic'
