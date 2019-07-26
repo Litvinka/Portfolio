@@ -24,6 +24,7 @@ AppAsset::register($this);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/jquery.maskedinput.min.js"></script>
     <script src="js/main-page.js"></script>
+    <script src="js/upload.js"></script>
     <?php $this->head() ?>
 </head>
 <body>

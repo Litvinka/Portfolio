@@ -456,13 +456,76 @@ div.profession-list-block{
     padding: 20px;
     background-color: white;
     border-radius: 20px;
+    position: relative;
+}
+.galery-block a{
+    padding: 10px 15px;
+    border-radius: 50%;
+    background-color: #292929;
+    border: 2px solid white;
+    color: white;
+}
+.galery-block a.left{
+    position: absolute;
+    top: calc(50% - 15px);
+    left: 5px;
+}
+.galery-block a.right{
+    position: absolute;
+    top: calc(50% - 15px);
+    right: 5px;
 }
 .galery-img{
     max-width: 100%;
     max-height: 100%;
     border-radius: 10px;
 }
+.close-img{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
 /*GALERY (END)*/
+
+
+/* UPLOAD FILE FORM */
+.upload-area{
+    width: 100%;
+    height: 200px;
+    border: 2px dashed gray;
+    border-radius: 3px;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    overflow: auto;
+}
+.upload-area:hover{
+    cursor:pointer;
+}
+.upload-area h4{
+    text-align: center;
+    font-weight: bold;
+    color: #292929;
+    margin-top: 30px;
+}
+#file{
+    display: none;
+}
+.thumbnail{
+    width: 80px;
+    height: 80px;
+    padding: 2px;
+    border: 2px solid lightgray;
+    border-radius: 3px;
+    float: left;
+}
+.size{
+    font-size:12px;
+}
+/* UPLOAD FILE FORM (END) */
 
 
 div.container {

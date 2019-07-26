@@ -15,7 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="background-galery">
     <div class="galery-block">
+        <img class="close-img" src="files/delete.png">
+        <a href="" class="left">&lt;</a>
         <img class="galery-img" src="">
+        <a href="" class="right">&gt;</a>
     </div>
 </div>
 
@@ -67,9 +70,14 @@ $this->params['breadcrumbs'][] = $this->title;
     ]);
     ?>
     
+    <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->id==$model->profession->user_id){ ?>
+    <input type="file" name="file" id="file"> 
+    <div class="upload-area" id="upload-file">  
+        <h4>Перетащите файл в данную область или нажмите, чтобы загрузить файл</h4>
+    </div>
+    <?php } ?>
+    
 </div>  
-
-
 
 
 

@@ -22,8 +22,6 @@ $(window).resize(function(){
 });
 
 
-
-
 //MODAL SCRIPT
 $(".delete-btn-a").click(function(e){
     $(".background-modal").css("display", "flex").hide().fadeIn();
@@ -75,16 +73,57 @@ function footer(){
 }
 
 
+// --- GALERY ---
 $("#all-elements-photo div img").click(function(){
-    $('.background-galery').css("display", "flex").hide().fadeIn();
-    $('.galery-img').attr('src',$(this).attr("src"));
-    console.log($(this).attr("src"));
+    start_galery(this);
 });
+
+//начало просмотра всех фото в большом размере в галерее
+function start_galery(img){
+    $('.background-galery').css("display", "flex").hide().fadeIn();
+    $('.galery-img').attr('src',$(img).attr("src"));
+    getLeftImg(img);
+    getNextImg(img);
+}
+
+function getLeftImg(img){
+    var prev_img=$(img).parent().prev().find('img');
+    if(prev_img.length>0){
+        $('.galery-block a.left').attr('href',prev_img.attr("src"));
+        $('.galery-block a.left').css('display','block');
+    }
+    else{
+        $('.galery-block a.left').css('display','none');
+    }
+}
+
+function getNextImg(img){
+    var next_img=$(img).parent().next().find('img');
+    if(next_img.length>0){
+        $('.galery-block a.right').attr('href',next_img.attr("src"));
+        $('.galery-block a.right').css('display','block');
+    }
+    else{
+        $('.galery-block a.right').css('display','none');
+    }
+}
+
+$(".galery-block a").click(function(e){
+    e.preventDefault();
+    $('.galery-img').attr('src',$(this).attr('href'));
+    var img=$('#all-elements-photo div img[src = "'+$(this).attr('href')+'"]').first();
+    getLeftImg(img);
+    getNextImg(img);
+});
+
+$("img.close-img").click(function(){
+    $('.background-galery').fadeOut();
+});
+
 $(".background-galery").click(function(e){
     if (e.target !== this){
         return;
     }
     $(".background-galery").fadeOut();
 });
-
-
+// --- GALERY (END) ---

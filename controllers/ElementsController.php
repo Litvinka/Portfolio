@@ -74,10 +74,37 @@ class ElementsController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => PhotoElements::find()->where(['element_id'=>$id]),
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 28,
             ],
         ]);
         return $this->render('view',['model'=>$model, 'dataProvider'=>$dataProvider]);
+    }
+    
+    
+    public function beforeAction($action)
+    {            
+        if ($action->id == 'upload') {
+            $this->enableCsrfValidation = false;
+        }
+        return parent::beforeAction($action);
+    }
+    
+    
+    public function actionUpload(){
+        $id=Yii::$app->request->post('id');
+        $model=Elements::find()->where(['id'=>$id])->one();
+        $file=$_FILES['file'];
+        $newfilename = date('dmYHis').'_'.str_replace(" ", "", $file['name']);
+        $filesize = $file['size'];
+        $location = Yii::getAlias('@webroot') . '/files/elements/' . $newfilename;
+        $src='files/elements/'.$newfilename;
+        if(move_uploaded_file($_FILES['file']['tmp_name'],$location)){
+            $photoElement = new PhotoElements();
+            $photoElement->element_id = $id;
+            $photoElement->link = $src;
+            $photoElement->save();
+        }
+        echo json_encode($src);
     }
     
     

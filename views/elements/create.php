@@ -38,6 +38,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?=Html::submitButton('Сохранить',['class'=>'form-button'])?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?> 
 
 </div>
