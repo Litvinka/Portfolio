@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\web\Responce;
 use app\models\Elements;
 use app\models\PhotoElements;
+use app\models\ElementTags;
 use yii\web\UploadedFile;
 use yii\data\ActiveDataProvider;
 
@@ -37,7 +38,6 @@ class ElementsController extends Controller
         $model=new Elements();
         if($model->load(Yii::$app->request->post())){
             $model->image=UploadedFile::getInstance($model,'image');
-            $model->photos=UploadedFile::getInstances($model,'photos');
             $model->tags=htmlspecialchars(trim($_POST['Elements']['tags']));
             $model->profession_id=$profession_id;
             if($model->addInfo()){
@@ -53,7 +53,6 @@ class ElementsController extends Controller
         $model=Elements::find()->where(['id'=>$id])->one();
         if($model->load(Yii::$app->request->post())){
             $model->image=UploadedFile::getInstance($model,'image');
-            $model->photos=UploadedFile::getInstances($model,'photos');
             $model->tags=htmlspecialchars(trim($_POST['Elements']['tags']));
             if($model->addInfo()){
                 return $this->redirect(['profession/view','id'=>$model->profession_id]);
@@ -111,12 +110,39 @@ class ElementsController extends Controller
     public function actionDelete(){
         $id=htmlspecialchars($_POST['id']);
         if($id){
-            Elements::find()->where(['id'=>$id])->one()->delete();
+            $photos=PhotoElements::find()->where(['element_id'=>$id])->all();
+            foreach($photos as $photo){
+                if (file_exists($photo->link)) {
+                    unlink($photo->link);
+                }
+                $photo->delete();
+            }
+            $tags=ElementTags::find()->where(['element_id'=>$id])->all();
+            foreach($tags as $tag){
+                $tag->delete();
+            }
+            $element=Elements::find()->where(['id'=>$id])->one();
+            if (file_exists($element->main_photo)) {
+                unlink($element->main_photo);
+            }
+            $element->delete();
             $session = Yii::$app->session;
             return $this->redirect($session['br_user_profession']['url']);
         }
         $model=Elements::find()->where(['id'=>$id])->one();
         return $this->render('view',['model'=>$model]);
     }
+    
+    
+    public function actionDeletephoto(){
+        $id=($_POST) ? htmlspecialchars($_POST['id']) : 0;
+        if($id>0){
+            $photo=PhotoElements::find()->where(['id'=>$id])->one();
+            unlink($photo->link);
+            $photo->delete();
+        }
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+    
     
 }

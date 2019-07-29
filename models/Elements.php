@@ -10,7 +10,6 @@ class Elements extends \yii\db\ActiveRecord
 {
     
     public $image;
-    public $photos;
     public $tags;
     
     public static function tableName()
@@ -48,16 +47,6 @@ class Elements extends \yii\db\ActiveRecord
             $this->image->saveAs(Yii::getAlias('@webroot') . '/files/elements/' . $newfilename);
         }
         if($this->save()){
-            if($this->photos!=null){
-                foreach($this->photos as $ph){
-                    $newfilename = date('dmYHis').'_'.str_replace(" ", "", $ph->name);
-                    $photoElement = new PhotoElements();
-                    $photoElement->element_id = $this->id;
-                    $photoElement->link = 'files/elements/'.$newfilename;
-                    $photoElement->save();
-                    $ph->saveAs(Yii::getAlias('@webroot') . '/files/elements/' . $newfilename);
-                }
-            }
             $this->setElementTags();
         }
         else{

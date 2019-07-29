@@ -25,8 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     <?php } ?>
     <?=$form->field($model,'image')->fileInput(['accept'=>'image/*'])->label(false)?>
-    <label class="control-label" for="elements-image">Добавить дополнительные фото</label>
-    <?=$form->field($model,'photos[]')->fileInput(['accept'=>'image/*','multiple' => true])->label(false)?>
     <label class="control-label" for="tags">Ключевые слова (через запятую)</label>
     <?=$form->field($model,'tags')->textInput(['value' => $model->getTags()])->label(false)?>
     <?=$form->field($model,'about')->widget(CKEditor::className(), [

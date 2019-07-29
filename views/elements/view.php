@@ -32,6 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
+<div class="background-modal-element">
+    <div class="modal-window-element">
+        <p>Вы уверены, что хотите удалить фотографию?</p>
+        <?php $form = ActiveForm::begin(['action' => 'index.php?r=elements/deletephoto','options' => ['method' => 'post']]) ?>
+            <input type="hidden" name="id" id="id" value="">
+            <input type="submit" value="Удалить">
+        <?php $form = ActiveForm::end()?>
+    </div>
+</div>
+
 <div class="one-element-block">
     <div class="details-prof">
         <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->id==$model->profession->user_id){ ?>

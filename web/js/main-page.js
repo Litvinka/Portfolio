@@ -1,7 +1,7 @@
 $(document).ready(function($){
     footer();
     //change size photo
-    var all_photo=$("#all-elements-photo div img");
+    var all_photo=$("#all-elements-photo div img.img-elem");
     for(var i=0;i<all_photo.length;++i){
         resize_img(all_photo[i],$(all_photo[i]).parent());
     }
@@ -14,7 +14,7 @@ $(document).ready(function($){
 
 //resize_window
 $(window).resize(function(){
-    var all_photo=$("#all-elements-photo div img");
+    var all_photo=$("#all-elements-photo div img.img-elem");
     for(var i=0;i<all_photo.length;++i){
         resize_img(all_photo[i],$(all_photo[i]).parent());
     }
@@ -26,12 +26,22 @@ $(window).resize(function(){
 $(".delete-btn-a").click(function(e){
     $(".background-modal").css("display", "flex").hide().fadeIn();
 });
-
 $(".background-modal").click(function(e){
     if (e.target !== this){
         return;
     }
     $(".background-modal").fadeOut();
+});
+
+function delete_photo(id){
+    $(".background-modal-element").css("display", "flex").hide().fadeIn();
+    $('.modal-window-element #id').val(id);
+}
+$(".background-modal-element").click(function(e){
+    if (e.target !== this){
+        return;
+    }
+    $(".background-modal-element").fadeOut();
 });
 //MODAL SCRIPT (END)
 
@@ -60,12 +70,6 @@ function resize_img(img, div){
 }
 
 
-//RESIZE IMAGE BEFORE UPLOAD
-function resize_img_upload(img){
-    
-}
-
-
 function footer(){
     if(($(document).outerHeight()-$("footer").outerHeight())<$(window).height()){
         $("footer").addClass('footer-fixed');
@@ -74,7 +78,7 @@ function footer(){
 
 
 // --- GALERY ---
-$("#all-elements-photo div img").click(function(){
+$("#all-elements-photo div img.img-elem").click(function(){
     start_galery(this);
 });
 
@@ -87,7 +91,7 @@ function start_galery(img){
 }
 
 function getLeftImg(img){
-    var prev_img=$(img).parent().prev().find('img');
+    var prev_img=$(img).parent().prev().find('img.img-elem');
     if(prev_img.length>0){
         $('.galery-block a.left').attr('href',prev_img.attr("src"));
         $('.galery-block a.left').css('display','block');
@@ -98,7 +102,7 @@ function getLeftImg(img){
 }
 
 function getNextImg(img){
-    var next_img=$(img).parent().next().find('img');
+    var next_img=$(img).parent().next().find('img.img-elem');
     if(next_img.length>0){
         $('.galery-block a.right').attr('href',next_img.attr("src"));
         $('.galery-block a.right').css('display','block');

@@ -23,6 +23,7 @@ AppAsset::register($this);
     <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/jquery.maskedinput.min.js"></script>
+    <script src="js/ImageTools.js"></script>
     <script src="js/main-page.js"></script>
     <script src="js/upload.js"></script>
     <?php $this->head() ?>

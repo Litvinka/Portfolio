@@ -27,8 +27,19 @@ $(function() {
     $("#file").change(function(){
         var fd = new FormData();
         var files = $('#file')[0].files[0];
-        fd.append('file',files);
-        uploadData(fd);
+        ImageTools.resize(files, {
+            width: '1000', // max width
+            height: '1000' // max height
+        }, function(blob, didItResize) {
+            if(didItResize){
+                fd.append('file',blob); 
+                uploadData(fd);
+            }
+            else{
+                fd.append('file',files);
+                uploadData(fd);
+            }
+        }); 
     });
 });
 
@@ -43,12 +54,17 @@ function uploadData(formdata){
         processData: false,
         dataType: 'json',
         success: function(data){
-            var html="<div><img src='"+data+"'></div>";
-            $("#all-elements-photo").append(html);
-            $("#all-elements-photo div img").on('load', function() {
+            var html="<div><img class='img-elem' src='"+data+"'></div>";
+            if($("#all-elements-photo div.empty").length>0){
+                $("#all-elements-photo").html(html);
+            }
+            else{
+                $("#all-elements-photo").append(html);
+            }
+            $("#all-elements-photo div .img-elem").on('load', function() {
                 resize_img(this,$(this).parent());
             });
-            $("#all-elements-photo div img").click(function(){
+            $("#all-elements-photo div .img-elem").click(function(){
                 start_galery(this);
             });
         }
